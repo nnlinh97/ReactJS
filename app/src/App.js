@@ -1,149 +1,144 @@
 import React, { Component } from 'react';
-import Header from './Components/Header/Header';
-import Menu from './Components/Menu/Menu';
-import Content from './Components/Content/Content';
-import Footer from './Components/Footer/Footer';
-import Products from './Components/Products/Products';
-import JSX from './Components/JSX/JSX';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [
-        {
-          id: 1,
-          name: 'Iphone X',
-          price: '1000',
-          image: 'https://tinyurl.com/ycamcv8c',
-          status: true
-        },
-        {
-          id: 2,
-          name: 'Samsung Galaxy Note 9',
-          price: '799',
-          image: 'https://tinyurl.com/y9rjs5kv',
-          status: true
-        },
-        {
-          id: 3,
-          name: 'Xiaomi Mi5',
-          price: '599',
-          image: 'https://tinyurl.com/y7hqyhgn',
-          status: true
-        }
-      ],
-      isActive: true
-    }
-    
-  }
-
-  onClick() {
-    console.log('clicked');
-  }
-
-  onAddProduct = () => {
-    console.log(this.refs.name.value);
-  };
-  onSetState = () => {
-    this.setState({
-      isActive: !this.state.isActive
-    });
-  }
-  render() {
-    let products = [
-      {
-        id: 1,
-        name: 'Iphone X',
-        price: '1000',
-        image: 'https://tinyurl.com/ycamcv8c',
-        status: true
-      },
-      {
-        id: 2,
-        name: 'Samsung Galaxy Note 9',
-        price: '799',
-        image: 'https://tinyurl.com/y9rjs5kv',
-        status: true
-      },
-      {
-        id: 3,
-        name: 'Xiaomi Mi5',
-        price: '599',
-        image: 'https://tinyurl.com/y7hqyhgn',
-        status: true
-      },
-    ];
-    let element = products.map((product, index) => {
-      let result = '';
-      if (product.status) {
-        result = <Products
-          key={product.id}
-          name={product.name}
-          price={product.price}
-          image={product.image}
-        />
-      }
-      return result;
-    });
-
-    let elementState = this.state.products.map((product, index) => {
-      let result = '';
-      if (product.status) {
-        result = <tr key={product.id}>
-          <td>{index + 1}</td>
-          <td>{product.name}</td>
-          <td>{product.price}</td>
-        </tr>
-      }
-      return result;
-    });
-    return (
-      <div className="App">
-        <JSX />
-        <Header />
-
-        <button type="submit" class="btn btn-default" onClick={this.onSetState}>
-          Click : {this.state.isActive ? 'true' : 'false'}
-        </button>
-
-        <table className="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Name</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {elementState}
-          </tbody>
-        </table>
-
-        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div className="panel panel-default">
-            <div className="panel-body">
-              <div className="form-group">
-                <label >Product Name</label>
-                <input type="text" className="form-control" ref="name" />
-              </div>
-              <button type="submit" className="btn btn-primary" onClick={this.onAddProduct}>
-                Save
-              </button>
+    render() {
+        return (
+            <div className="container">
+                <div className="text-center">
+                    <h1>Working Management</h1>
+                    <hr />
+                </div>
+                <div className="row">
+                    <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div className="panel panel-primary">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Add</h3>
+                            </div>
+                            <div className="panel-body">
+                                <form>
+                                    <div className="form-group">
+                                        <label>Name</label>
+                                        <input type="text" className="form-control" />
+                                    </div>
+                                    <label>Status</label>
+                                    <select className="form-control" required="required">
+                                        <option value={1}>Active</option>
+                                        <option value={0}>Block</option>
+                                    </select>
+                                    <br />
+                                    <div className="text-center">
+                                        <button type="submit" className="btn btn-warning">Save</button>&nbsp;
+                            `           <button type="submit" className="btn btn-danger">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                        <button type="button" className="btn btn-primary">
+                            <span className="glyphicon glyphicon-plus mr-5" /> Add &nbsp;
+                        </button>
+                        <br/>
+                        <div className="row mt-15">
+                            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div className="input-group">
+                                    <input type="text" className="form-control" placeholder="Nhập từ khóa..." />
+                                    <span className="input-group-btn">
+                                        <button className="btn btn-primary" type="button">
+                                            <span className="glyphicon glyphicon-search mr-5" /> Search
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div className="dropdown">
+                                    <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Sort Name - Status <span className="fa fa-caret-square-o-down ml-5" />
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li>
+                                            <a role="button">
+                                                <span className="glyphicon glyphicon-alpha pr-5">
+                                                    Name A-Z
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a role="button">
+                                                <span className="glyphicon glyphicon-alpha pr-5">
+                                                    Name Z-A
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li role="separator" className="divider" />
+                                        <li><a role="button">Status - Active</a></li>
+                                        <li><a role="button">Status - Block</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row mt-15">
+                            <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <table className="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th className="text-center">STT</th>
+                                            <th className="text-center">Name</th>
+                                            <th className="text-center">Status</th>
+                                            <th className="text-center">
+                                                <span className="glyphicon glyphicon-pencil"></span>
+                                            </th>
+                                            <th className="text-center">
+                                                <span className="glyphicon glyphicon-trash"></span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td />
+                                            <td>
+                                                <input type="text" className="form-control" />
+                                            </td>
+                                            <td>
+                                                <select className="form-control">
+                                                    <option value={-1}>All</option>
+                                                    <option value={0}>Block</option>
+                                                    <option value={1}>Active</option>
+                                                </select>
+                                            </td>
+                                            <td />
+                                            <td />
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Học lập trình</td>
+                                            <td className="text-center">
+                                                <span className="label label-success">
+                                                    Kích Hoạt
+                                                </span>
+                                            </td>
+                                            <td className="text-center">
+                                                <button type="button" className="btn btn-warning">
+                                                    <span className="fa fa-pencil mr-5" />Edit
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type="button" className="btn btn-danger">
+                                                    <span className="fa fa-trash mr-5" />Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <br />
-        <hr />
-        {element}
 
-        {/* <button type="button" className="btn btn-danger" onClick={this.onClick}>
-          Click
-        </button> */}
 
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default App;
