@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TaskForm from './Components/WorkingManagement/TaskForm/TaskForm';
 import Control from './Components/WorkingManagement/Control/Control';
 import TaskList from './Components/WorkingManagement/TaskList/TaskList';
-
+import Demo from './Redux/Demo';
 const randomstring = require("randomstring");
 const _ = require("lodash");
 
@@ -176,7 +176,6 @@ class App extends Component {
 
         let { tasks, isDisplayForm, taskEditing, filter, keyword, sort } = this.state;
 
-        console.log(sort);
 
         if (filter) {
             if (filter.name) {
