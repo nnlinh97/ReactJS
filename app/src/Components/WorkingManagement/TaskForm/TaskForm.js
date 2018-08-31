@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../ReduxWorkingManagement/actions/index';
 
 class TaskForm extends Component {
 
@@ -11,9 +13,9 @@ class TaskForm extends Component {
         }
     }
 
-    
+
     componentWillMount() { //khi component được gắn vào thì hàm này được gọi duy nhất 1 lần
-        if(this.props.task){
+        if (this.props.task) {
             let task = this.props.task;
             this.setState({
                 id: task.id,
@@ -22,16 +24,16 @@ class TaskForm extends Component {
             });
         }
     }
-    
+
     componentWillReceiveProps(nextProps) {
-        if(nextProps && nextProps.task){
+        if (nextProps && nextProps.task) {
             let task = nextProps.task;
             this.setState({
                 id: task.id,
                 name: task.name,
                 status: task.status
             });
-        } else if(!nextProps.task){
+        } else if (!nextProps.task) {
             this.setState({
                 id: "",
                 name: "",
@@ -39,7 +41,7 @@ class TaskForm extends Component {
             });
         }
     }
-    
+
 
     onCloseForm = () => {
         this.props.onCloseForm();
@@ -49,7 +51,7 @@ class TaskForm extends Component {
         let target = event.target;
         let name = target.name;
         let value = target.value;
-        if(name === "status"){
+        if (name === "status") {
             value = target.value === "true" ? true : false;
         }
         this.setState({
@@ -59,7 +61,11 @@ class TaskForm extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        this.props.onSubmitForm(this.state);
+
+        // this.props.onSubmitForm(this.state);
+        this.props.onAddTask(this.state);
+
+
         this.onClear();
         this.onCloseForm();
     }
@@ -71,16 +77,16 @@ class TaskForm extends Component {
         });
     }
     render() {
-        let taskId = this.state.id; 
+        let taskId = this.state.id;
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">
                     <h3 className="panel-title ">
                         {(taskId !== "" ? "Edit Form" : "Add Form")}
-                    <span
-                        className="glyphicon glyphicon-remove-circle pull-right"
-                        onClick={this.onCloseForm}
-                    ></span>
+                        <span
+                            className="glyphicon glyphicon-remove-circle pull-right"
+                            onClick={this.onCloseForm}
+                        ></span>
                     </h3>
                 </div>
                 <div className="panel-body">
@@ -117,4 +123,16 @@ class TaskForm extends Component {
     }
 }
 
-export default TaskForm;
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddTask: (task) => {
+            dispatch(actions.addTask(task));
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

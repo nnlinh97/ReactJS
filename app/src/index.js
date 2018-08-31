@@ -5,5 +5,16 @@ import App from './App';
 // import Hello from './Components/Hello/Hello';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//Store
+import {createStore} from 'redux';
+import myReducer from './ReduxWorkingManagement/reducers/index';
+import {Provider} from 'react-redux';
+const store = createStore(myReducer);
+
+ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>, 
+        document.getElementById('root')
+);
 registerServiceWorker();
