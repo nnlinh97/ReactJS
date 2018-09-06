@@ -119,17 +119,17 @@ class App extends Component {
     //     }
     // }
 
-    onDeleteTask = (taskId) => {
-        let tasks = this.state.tasks;
-        let index = this.findindex(taskId);
-        if (index !== -1) {
-            tasks.splice(index, 1);
-            this.setState({
-                tasks: tasks
-            });
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
-    }
+    // onDeleteTask = (taskId) => {
+    //     let tasks = this.state.tasks;
+    //     let index = this.findindex(taskId);
+    //     if (index !== -1) {
+    //         tasks.splice(index, 1);
+    //         this.setState({
+    //             tasks: tasks
+    //         });
+    //         localStorage.setItem('tasks', JSON.stringify(tasks));
+    //     }
+    // }
 
     onUpdate = (task) => {
         this.onShowForm();
@@ -247,7 +247,12 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className={isDisplayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : ""}>
-                        {elmTaskForm}
+                        {/* {elmTaskForm} */}
+                        <TaskForm
+                            // onCloseForm={this.onCloseForm}
+                            // onSubmitForm={this.onSubmitForm}
+                            task={taskEditing}
+                        />
                     </div>
                     <div className={isDisplayForm ? "col-xs-8 col-sm-8 col-md-8 col-lg-8" : "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
                         <button type="button" className="btn btn-primary" onClick={this.onToggleForm}>
@@ -267,7 +272,7 @@ class App extends Component {
                                 <TaskList
                                     // tasks={tasks}
                                     // onUpdateStatus={this.onUpdateStatus}
-                                    onDeleteTask={this.onDeleteTask}
+                                    // onDeleteTask={this.onDeleteTask}
                                     onUpdate={this.onUpdate}
                                     onFilter={this.onFilter}
                                 />
@@ -296,5 +301,5 @@ const mapDispatchToProps = (dispatch, props) => {
     };
 };
 
-
+//42 6:40
 export default connect(mapStateToProps, mapDispatchToProps)(App);

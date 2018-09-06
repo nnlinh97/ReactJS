@@ -8,6 +8,8 @@ let data = JSON.parse(localStorage.getItem('tasks'));
 let initialState = data ? data : []; //state này truyền qua props cho TaskList Component
 // console.log(initialState);
 var myReducer = (state = initialState, action) => {
+
+    let index = -1;
     switch (action.type) {
 
         case types.LIST_ALL:
@@ -24,14 +26,28 @@ var myReducer = (state = initialState, action) => {
             return [...state]; //copy ra 1 array moi roi return ve
 
         case types.UPDATE_STATUS_TASK:
-                let index = _.findIndex(state, (task) => {
-                    return task.id === action.taskId;
-                });
-                console.log(index);
-                if (index !== -1) {
-                    state[index].status = !state[index].status;
-                    localStorage.setItem('tasks', JSON.stringify(state));
-                }
+            index = _.findIndex(state, (task) => {
+                return task.id === action.taskId;
+            });
+            // console.log(index);
+            if (index !== -1) {
+                // state[index].status = !state[index].status;
+                let cloneTask = { ...state[index] };
+                cloneTask.status = !cloneTask.status;
+                state[index] = cloneTask;
+                localStorage.setItem('tasks', JSON.stringify(state));
+            }
+            return [...state];
+
+        case types.DELETE_TASK:
+            index = _.findIndex(state, (task) => {
+                return task.id === action.taskId;
+            });
+            // console.log(action);
+            if (index !== -1) {
+                state.splice(index, 1);
+                localStorage.setItem('tasks', JSON.stringify(state));
+            }
             return [...state];
 
         default: return state;
