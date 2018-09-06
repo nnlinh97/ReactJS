@@ -15,13 +15,24 @@ var myReducer = (state = initialState, action) => {
         case types.LIST_ALL:
             return state;
 
-        case types.ADD_TASK:
-            let newTask = {
-                id: randomstring.generate(),
+        case types.SAVE_TASK:
+
+            let task = {
+                id: action.task.id,
                 name: action.task.name,
                 status: action.task.status
+            };
+
+            if (!task.id) {
+                task.id = randomstring.generate();
+                state.push(task);
+            }else {
+                index = _.findIndex(state, (task) => {
+                    return task.id === action.task.id;
+                });
+                state[index] = task;
             }
-            state.push(newTask);
+
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state]; //copy ra 1 array moi roi return ve
 

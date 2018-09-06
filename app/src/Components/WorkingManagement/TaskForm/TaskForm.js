@@ -63,7 +63,7 @@ class TaskForm extends Component {
         event.preventDefault();
 
         // this.props.onSubmitForm(this.state);
-        this.props.onAddTask(this.state);
+        this.props.onSaveTask(this.state);
 
 
         this.onClear();
@@ -132,8 +132,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddTask: (task) => {
-            dispatch(actions.addTask(task));
+        onSaveTask: (task) => {
+            dispatch(actions.saveTask(task));
         },
         onCloseForm: () => {
             dispatch(actions.closeForm());
