@@ -10,7 +10,7 @@ class TaskForm extends Component {
             id: "",
             name: "",
             status: false
-        }
+        };
     }
 
 
@@ -22,26 +22,22 @@ class TaskForm extends Component {
                 name: task.name,
                 status: task.status
             });
-        }
+        } else  
+            this.onClear();
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps && nextProps.task) {
+        // console.log(nextProps);
+        if (nextProps.task && nextProps.task.id != null) {
             let task = nextProps.task;
             this.setState({
                 id: task.id,
                 name: task.name,
                 status: task.status
             });
-        } else if (!nextProps.task) {
-            this.setState({
-                id: "",
-                name: "",
-                status: false
-            });
-        }
+        } else 
+            this.onClear();
     }
-
 
     onCloseForm = () => {
         this.props.onCloseForm();
@@ -56,22 +52,21 @@ class TaskForm extends Component {
         }
         this.setState({
             [name]: value
-        })
+        });
     }
 
     onSubmit = (event) => {
         event.preventDefault();
-
         // this.props.onSubmitForm(this.state);
         this.props.onSaveTask(this.state);
-
-
         this.onClear();
         this.onCloseForm();
     }
 
     onClear = () => {
+        console.log("onClear");
         this.setState({
+            id: "",
             name: "",
             status: false
         });
@@ -83,7 +78,7 @@ class TaskForm extends Component {
             <div className="panel panel-primary">
                 <div className="panel-heading">
                     <h3 className="panel-title ">
-                        {(taskId !== "" ? "Edit Form" : "Add Form")}
+                        {(this.state.id !== "" ? "Edit Form" : "Add Form")}
                         <span
                             className="glyphicon glyphicon-remove-circle pull-right"
                             onClick={this.onCloseForm}
@@ -125,6 +120,7 @@ class TaskForm extends Component {
 }
 
 const mapStateToProps = (state) => {
+    // console.log(state.taskEditing);
     return {
         isDisplayForm: state.isDisplayForm,
         task: state.taskEditing

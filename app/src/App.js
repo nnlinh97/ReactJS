@@ -72,7 +72,14 @@ class App extends Component {
         //     });
         // }
 
-        this.props.onToggleForm();
+        if (!this.props.taskEditing.id) {
+            this.props.onToggleForm();
+        }
+        this.props.onClearTask({
+            id: "",
+            name: "",
+            status: false
+        });
 
     }
 
@@ -249,9 +256,9 @@ class App extends Component {
                     <div className={isDisplayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : ""}>
                         {/* {elmTaskForm} */}
                         <TaskForm
-                            // onCloseForm={this.onCloseForm}
-                            // onSubmitForm={this.onSubmitForm}
-                            task={taskEditing}
+                        // onCloseForm={this.onCloseForm}
+                        // onSubmitForm={this.onSubmitForm}
+                        // task={taskEditing}
                         />
                     </div>
                     <div className={isDisplayForm ? "col-xs-8 col-sm-8 col-md-8 col-lg-8" : "col-xs-12 col-sm-12 col-md-12 col-lg-12"}>
@@ -289,7 +296,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisplayForm: state.isDisplayForm
+        isDisplayForm: state.isDisplayForm,
+        taskEditing: state.taskEditing
     };
 };
 
@@ -297,6 +305,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         onToggleForm: () => {
             dispatch(actions.toggleForm())
+        },
+        onClearTask: (task) => {
+            dispatch(actions.editTask(task));
         }
     };
 };
