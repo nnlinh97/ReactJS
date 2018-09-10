@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../ReduxWorkingManagement/actions/index';
 
 class Sort extends Component {
 
@@ -63,4 +65,20 @@ class Sort extends Component {
     }
 }
 
-export default Sort;
+const mapStateToProps = (state) => { //state là của thèn store
+    return {
+    };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSort: (sortBy, value) => {
+            let sort = {
+                by: sortBy,
+                value, value
+            }
+            dispatch(actions.sort(sort));
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

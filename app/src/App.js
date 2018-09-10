@@ -190,8 +190,9 @@ class App extends Component {
         let {
             tasks,
             // isDisplayForm,
-            taskEditing,
-            filter, keyword,
+            // taskEditing,
+            // filter,
+             keyword,
             sort
         } = this.state;
 
@@ -219,7 +220,7 @@ class App extends Component {
             ? <TaskForm
                 // onCloseForm={this.onCloseForm}
                 // onSubmitForm={this.onSubmitForm}
-                task={taskEditing}
+                // task={taskEditing}
             />
             : "";
 
@@ -281,7 +282,7 @@ class App extends Component {
                                     // onUpdateStatus={this.onUpdateStatus}
                                     // onDeleteTask={this.onDeleteTask}
                                     onUpdate={this.onUpdate}
-                                    onFilter={this.onFilter}
+                                    // onFilter={this.onFilter}
                                 />
                             </div>
                         </div>

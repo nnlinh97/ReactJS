@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../ReduxWorkingManagement/actions/index'
+import * as actions from '../../../ReduxWorkingManagement/actions/index';
 
 class TaskItem extends Component {
 
